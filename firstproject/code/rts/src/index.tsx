@@ -9,11 +9,13 @@ const App = () => {
         <div>
             <h1>Basics of React with TypeScript</h1>
             <Parent />
+            <div style={{"width": "100%", border: "4px solid black", marginTop: "2rem"}}></div>
             <br />
             <br />
 
             <h3>Basics of React with TS and State</h3>
             <GuestList />
+            <div style={{"width": "100%", border: "4px solid black", marginTop: "2rem"}}></div>
             <br />
             <br />
 
