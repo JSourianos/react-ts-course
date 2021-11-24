@@ -35,3 +35,5 @@ There are 2 rules to remember about references (refs):
 - Defining a ref with TypeScript:
   - `const inputRef = useRef<HTMLInputElement | null>(null);`
   - **NOTE: Unless you specify the null, we will have errors in the code. This is because refs might be null when the App loads(?)**
+
+## TypeScript with Redux
