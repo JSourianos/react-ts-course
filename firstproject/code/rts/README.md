@@ -1,46 +1,37 @@
-# Getting Started with Create React App
+# React - TypeScript Udemy Course
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Types Around Props and State
+- **Interface** or **Type** to define what props the child component expects to receive.
+    - Are we providing the correct props to Child when we show it in the Parent?
+    - Are we using the correctly named + types props in Child?
 
-## Available Scripts
+- TypeScript won't know by default that we are creating a React Component
+    - So a common way to define a component is as follows:
+        - `const Component: React.FC = () => {}`
+    - If you have defined an interface for the prop types for the component, you can do as follows:
+        - `const Component: React.FC<PropOrInterfaceType> = ({propOne, propTwo}) => {}`
+    - The third way of defining the props on a child component is as follows:
+        - `const Component = ({propOne, propTwo}: PropOrInterfaceType) => {}`
+        - **Note: The "recommended" way of defining an functional component is the two first methods defined above.**
 
-In the project directory, you can run:
+## Types around Events and Refs
+- **Events** should have its own type.
+    - A onChange event has the following type:
+        - `const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {}`
+    - A onDragStart event has the following type:
+        - `const onDragStart = (event: React.DragEvent<HTMLInputElement>) => {}`
+- Most IDEs will allow you to hover over the event in ex. an HTML tag, so most of the time you can find what type your current event has, by simply hovering over the HTML-property.
 
-### `yarn start`
+### **Refs**
+#### useRef(initialValue) is a built-in React hook that accepts one argument as the initial value and returns a reference (aka ref). A reference is an object having a special property current.
+There are 2 rules to remember about references (refs):
+1. The value of the reference is persisted between component re-renderings,
+2. Updating a reference dosen't trigger a component re-rendering
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- useRef() gives you access to the special property `current`, which is a property stored on the current referenced element.
+    - In our case, the ref is associated with the `<Input />` element, so through the `current` property we can write:
+        - `inputRef.current.focus()`, which will focus the input tag when the component is loaded. It gives us the current ref element, and we can access its properties.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Defining a ref with TypeScript:
+    - `const inputRef = useRef<HTMLInputElement | null>(null);`
+    - **NOTE: Unless you specify the null, we will have errors in the code. This is because refs might be null when the App loads(?)**
